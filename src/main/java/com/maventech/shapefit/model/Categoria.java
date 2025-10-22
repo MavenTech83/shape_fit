@@ -1,5 +1,7 @@
 package com.maventech.shapefit.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -59,11 +61,11 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
-	public List<Exercicio> getExercicios() {
+	public List<Exercicios> getExercicios() {
 		return exercicios;
 	}
 
-	public void setExercicios(List<Exercicio> exercicios) {
+	public void setExercicios(List<Exercicios> exercicios) {
 		this.exercicios = exercicios;
 	}
 	
