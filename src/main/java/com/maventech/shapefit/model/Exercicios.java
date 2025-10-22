@@ -27,6 +27,10 @@ import jakarta.validation.constraints.Size;
 	    @Size(min = 10, max = 1000, message = "A descrição deve conter entre 10 e 1000 caracteres!")
 	    private String descricao;
 		
+		//RELACIONAMENTO: Muitos Exercícios pertencem a uma Categoria//
+	    @ManyToOne
+	    @JsonIgnoreProperties("exercicios")
+	    private Categoria categoria;
 		
 		// Getters e Setters//
 
