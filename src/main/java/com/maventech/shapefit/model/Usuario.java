@@ -45,8 +45,19 @@ public class Usuario {
 	@NotNull(message = "O Atributo Altura é Obrigatório!")
 	private Double altura;
 
+	@Column(columnDefinition = "DECIMAL(5, 2)")
+	private Double imc;
+
 	
 	
+	public Double getImc() {
+		return imc;
+	}
+
+	public void setImc(Double imc) {
+		this.imc = imc;
+	}
+
 	public Long getId() {
 		return id;
 	}
