@@ -28,6 +28,7 @@ public class UsuarioService {
 		
 		if (peso != null && altura != null && altura > 0) {
 			Double imcCalculado = peso / (altura * altura);
+			imcCalculado = Math.round(imcCalculado * 100.0) / 100.0;
 			
 			usuario.setImc(imcCalculado);
 			
