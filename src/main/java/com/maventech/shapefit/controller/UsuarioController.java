@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.maventech.shapefit.model.Usuario;
 import com.maventech.shapefit.repository.UsuarioRepository;
+import com.maventech.shapefit.service.UsuarioService;
 
 import jakarta.validation.Valid;
 
@@ -31,6 +32,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired // Injeta o IMC
+    private UsuarioService usuarioService;
 	
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll() {
@@ -72,6 +76,12 @@ public class UsuarioController {
 			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
+	@PutMapping("/imc/{id}") 
+	public ResponseEntity<Usuario> calcularImc(@PathVariable Long id) {
+	   	    return usuarioService.calcularImc(id)
+	            .map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
+	            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
