@@ -10,9 +10,21 @@ public class ShapefitApplication {
 
 	public static void main(String[] args) {
 		
-		Dotenv dotenv = Dotenv.load();
+		try {
+            // Carrega .env apenas se existir (modo local)
+            Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
 
-		dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+            // Adiciona variáveis locais se não existirem no ambiente
+            dotenv.entries().forEach(entry -> {
+                if (System.getenv(entry.getKey()) == null) {
+                    System.setProperty(entry.getKey(), entry.getValue());
+                }
+            });
+
+            System.out.println("✅ Variáveis carregadas (modo local)");
+        } catch (Exception e) {
+            System.out.println("⚠️ Nenhum arquivo .env encontrado (modo produção)");
+        }
 		
 		SpringApplication.run(ShapefitApplication.class, args);
 	}
